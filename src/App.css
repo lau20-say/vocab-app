@@ -1,322 +1,827 @@
+/* App.css */
+
+/* Reset mặc định và thiết lập font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Thiết lập nền tối cho toàn bộ ứng dụng */
 .App {
-  text-align: center;
-  padding: 40px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-}
-
-.title {
-  font-size: 3em;
-  color: white;
-  margin-bottom: 40px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 1s ease-in;
-}
-
-.mode-selection {
+  background-color: #1c2526;
+  color: #ffffff;
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  gap: 25px;
-  perspective: 1000px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.mode-btn {
-  padding: 15px 35px;
-  font-size: 1.2em;
-  background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-style: preserve-3d;
+/* Tiêu đề chính */
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-align: center;
 }
 
-.mode-btn:hover {
-  transform: translateY(-5px) rotateX(10deg);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.content {
-  margin-top: 30px;
-  position: relative;
-}
-
+/* Nút quay lại */
 .back-btn {
-  padding: 12px 25px;
-  background: linear-gradient(45deg, #ff4757, #ff6b81);
-  color: white;
-  border: none;
+  background-color: transparent;
+  border: 1px solid #4a90e2;
+  color: #4a90e2;
+  padding: 10px 20px;
   border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: absolute;
-  left: 20px;
-  top: -10px;
+  margin-bottom: 30px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .back-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+  background-color: #4a90e2;
+  color: #ffffff;
 }
 
+/* Thẻ từ vựng */
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  margin: 20px auto;
-  width: 450px;
-  position: relative;
-  overflow: hidden;
-  transform: scale(0.95);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 50px;
+  width: 33vw;
+  height: 50vh;
+  max-width: 800px;
+  max-height: 600px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.card:hover {
-  transform: scale(1);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+/* Loại bỏ hiệu ứng scale khi hiện nghĩa */
+.card.show-meaning {
+  /* Đã bỏ transform: scale */
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
-  transform: rotate(30deg);
-  pointer-events: none;
-  animation: shimmer 6s infinite;
-}
-
+/* Điều chỉnh các thành phần bên trong */
 .word {
-  font-size: 2.5em;
-  color: #2c3e50;
-  margin: 0;
-  transition: transform 0.5s ease;
-}
-
-.show-meaning .word {
-  transform: translateY(-20px);
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .meaning {
-  font-size: 1.3em;
-  color: #7f8c8d;
-  margin-top: 25px;
+  font-size: 1.4rem;
+  color: #b0bec5;
+  margin-top: 15px;
   opacity: 0;
-  transform: translateY(20px);
+  animation: slideIn 0.3s forwards;
 }
 
-.show-meaning .meaning {
-  opacity: 1;
-  transform: translateY(0);
-  animation: slideUp 0.5s ease forwards;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Thanh tiến độ */
+.progress-bar {
+  background-color: #455a64;
+  height: 6px;
+  border-radius: 3px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: #4a90e2;
+  height: 100%;
+  transition: width 0.1s linear;
+}
+
+/* Nút tiếp theo */
 .next-btn {
-  margin-top: 25px;
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #00b894, #55efc4);
-  color: white;
+  background-color: #4a90e2;
   border: none;
+  color: #ffffff;
+  padding: 12px 24px;
   border-radius: 8px;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 .next-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+  background-color: #357abd;
 }
 
+/* Các lựa chọn trong chế độ kiểm tra */
 .options {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
+  margin-top: 30px;
+  justify-content: center;
 }
 
 .option-btn {
-  padding: 12px;
-  background: linear-gradient(45deg, #dfe6e9, #b2bec3);
+  background-color: #455a64;
   border: none;
+  color: #ffffff;
+  padding: 12px 20px;
   border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s;
+  flex: 1 1 200px;
+  max-width: 300px;
 }
 
 .option-btn:hover {
-  transform: scale(1.03);
-  background: linear-gradient(45deg, #b2bec3, #dfe6e9);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #546e7a;
 }
 
+/* Container cho bảng thống kê sau bài kiểm tra */
+.result-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Kết quả kiểm tra */
 .result {
   text-align: left;
-  padding: 25px;
-  animation: fadeIn 0.5s ease;
 }
 
 .result h3 {
-  color: #00b894;
-  font-size: 1.8em;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
 }
 
 .result p {
-  font-size: 1.3em;
-  color: #2c3e50;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.result h4 {
+  font-size: 1.4rem;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .result ul {
   list-style: none;
-  padding: 0;
+  margin-bottom: 20px;
 }
 
 .result li {
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  padding: 8px 0;
+  font-size: 1.2rem;
 }
 
 .correct {
-  background: linear-gradient(45deg, #d4edda, #c3e6cb);
-  color: #155724;
+  color: #4caf50;
 }
 
 .wrong {
-  background: linear-gradient(45deg, #f8d7da, #f5c6cb);
-  color: #721c24;
-}
-
-.result li:hover {
-  transform: translateX(5px);
+  color: #ef5350;
 }
 
 .restart-btn {
-  margin-top: 25px;
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #ffa502, #ffdd00);
-  color: #2c3e50;
+  background-color: #4a90e2;
   border: none;
+  color: #ffffff;
+  padding: 12px 24px;
   border-radius: 8px;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .restart-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 165, 2, 0.4);
+  background-color: #357abd;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%) rotate(30deg); }
-  50% { transform: translateX(100%) rotate(30deg); }
-  100% { transform: translateX(-100%) rotate(30deg); }
-}
-.data-btn {
-  padding: 12px 25px;
-  background: linear-gradient(45deg, #6c5ce7, #a29bfe);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-.data-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
-}
-
+/* Notepad để nhập dữ liệu */
 .notepad {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  margin: 20px auto;
-  width: 500px;
-  animation: fadeIn 0.5s ease;
+  background-color: #2c3e50;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .notepad h3 {
-  color: #2c3e50;
+  font-size: 1.5rem;
   margin-bottom: 15px;
 }
 
 .notepad textarea {
   width: 100%;
+  height: 200px;
+  background-color: #37474f;
+  border: none;
+  border-radius: 8px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical;
-  font-family: 'Arial', sans-serif;
-  font-size: 1em;
+  color: #ffffff;
+  font-size: 1rem;
+  resize: none;
+}
+
+.notepad textarea::placeholder {
+  color: #b0bec5;
 }
 
 .notepad-actions {
-  margin-top: 15px;
   display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 15px;
+  justify-content: center;
 }
 
 .notepad-actions button {
-  padding: 10px 20px;
+  background-color: #4a90e2;
   border: none;
-  border-radius: 5px;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.notepad-actions button:first-child {
-  background: linear-gradient(45deg, #00b894, #55efc4);
-  color: white;
-}
-
-.notepad-actions button:first-child:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.4);
+  transition: background-color 0.3s;
 }
 
 .notepad-actions button:last-child {
-  background: linear-gradient(45deg, #ff4757, #ff6b81);
-  color: white;
+  background-color: #ef5350;
+}
+
+.notepad-actions button:hover {
+  background-color: #357abd;
 }
 
 .notepad-actions button:last-child:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+  background-color: #d32f2f;
 }
 
-.progress-bar {
-  width: 100%;
-  height: 5px;
-  background: #dfe6e9;
-  border-radius: 5px;
-  margin-top: 20px;
-  overflow: hidden;
-  position: relative;
+/* Nút nhập dữ liệu */
+.data-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-bottom: 30px;
+  transition: background-color 0.3s;
 }
 
-.progress {
+.data-btn:hover {
+  background-color: #357abd;
+}
+
+/* Chọn chế độ */
+.mode-selection {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mode-btn {
+  background-color: #455a64;
+  border: none;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mode-btn:hover {
+  background-color: #546e7a;
+}
+
+.mode-btn:disabled {
+  background-color: #37474f;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Thông báo lỗi */
+.error-message {
+  color: #ef5350;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Widget phát nhạc */
+.floating-widget {
+  position: fixed;
+  bottom: 20px;
+  z-index: 1000;
+}
+
+.floating-widget.bottom-left {
+  left: 20px;
+}
+
+.floating-widget.bottom-right {
+  right: 20px;
+}
+
+.toggle-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+  background-color: #357abd;
+}
+
+.music-player-widget {
+  background-color: #1c2526;
+  border-radius: 12px;
+  padding: 15px;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #37474f;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  color: #b0bec5;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* Tiêu đề và thông tin bài hát */
+.music-player-widget .music-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.music-player-widget .music-info .icon {
+  width: 30px;
+  height: 30px;
+  background-color: #4a90e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.music-player-widget .music-info .details {
+  flex: 1;
+}
+
+.music-player-widget .music-info .details h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.music-player-widget .music-info .details p {
+  font-size: 0.9rem;
+  color: #b0bec5;
+}
+
+.music-player-widget .music-info .thumbnail {
+  width: 50px;
+  height: 50px;
+  background-color: #37474f;
+  border-radius: 8px;
+}
+
+/* Nhập link nhạc */
+.music-input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.music-input {
+  flex: 1;
+  background-color: #37474f;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.music-input::placeholder {
+  color: #b0bec5;
+}
+
+.load-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-btn:hover {
+  background-color: #357abd;
+}
+
+/* Điều khiển nhạc */
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.music-controls .control-btn {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.music-controls .control-btn:hover {
+  color: #4a90e2;
+}
+
+.music-controls .play-pause {
+  font-size: 2rem;
+}
+
+/* Thanh tiến trình */
+.music-progress {
+  background-color: #455a64;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.music-progress-bar {
+  background-color: #4a90e2;
   height: 100%;
-  background: linear-gradient(45deg, #00b894, #55efc4);
+  border-radius: 2px;
   transition: width 0.1s linear;
+}
+
+/* Ẩn điều khiển âm lượng */
+.volume-control {
+  display: none;
+}
+
+/* Widget đếm ngược */
+.countdown-widget {
+  background-color: #1c2526;
+  border-radius: 12px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #37474f;
+  text-align: center;
+}
+
+.countdown-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.countdown-display h3 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.countdown-labels {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2rem;
+  color: #b0bec5;
+}
+
+/* Input để chỉnh số giờ */
+.countdown-input {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.custom-time-input {
+  background-color: #37474f;
+  border: 1px solid #455a64;
+  border-radius: 8px;
+  padding: 10px;
+  color: #ffffff;
+  width: 100px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.custom-time-input::placeholder {
+  color: #b0bec5;
+}
+
+.start-btn {
+  background-color: #4a90e2;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #357abd;
+}
+
+/* Nút đóng */
+.close-btn {
+  background-color: transparent;
+  border: none;
+  color: #b0bec5;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* Ẩn các nút điều khiển */
+.countdown-controls {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .card {
+    padding: 30px;
+    width: 50vw;
+    height: 40vh;
+    max-width: 90%;
+    max-height: 500px;
+  }
+
+  .word {
+    font-size: 1.5rem;
+  }
+
+  .meaning {
+    font-size: 1.2rem;
+  }
+
+  .option-btn {
+    font-size: 1rem;
+    padding: 10px 15px;
+    flex: 1 1 150px;
+    max-width: 200px;
+  }
+
+  .result-container {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .result h3 {
+    font-size: 1.5rem;
+  }
+
+  .result p {
+    font-size: 1.2rem;
+  }
+
+  .result h4 {
+    font-size: 1.2rem;
+  }
+
+  .result li {
+    font-size: 1rem;
+  }
+
+  .restart-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .notepad {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .notepad h3 {
+    font-size: 1.2rem;
+  }
+
+  .notepad textarea {
+    height: 150px;
+  }
+
+  .data-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .mode-selection {
+    gap: 15px;
+  }
+
+  .mode-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .music-player-widget {
+    width: 300px;
+  }
+
+  .countdown-widget {
+    width: 350px;
+  }
+
+  .countdown-display h3 {
+    font-size: 3rem;
+  }
+
+  .countdown-labels {
+    font-size: 1rem;
+  }
+
+  .custom-time-input {
+    width: 90px;
+    font-size: 1rem;
+  }
+
+  .start-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    padding: 20px;
+    width: 80vw;
+    height: 35vh;
+    max-width: 100%;
+    max-height: 400px;
+  }
+
+  .word {
+    font-size: 1.2rem;
+  }
+
+  .meaning {
+    font-size: 1rem;
+  }
+
+  .option-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .result-container {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .result h3 {
+    font-size: 1.2rem;
+  }
+
+  .result p {
+    font-size: 1rem;
+  }
+
+  .result h4 {
+    font-size: 1rem;
+  }
+
+  .result li {
+    font-size: 0.9rem;
+  }
+
+  .restart-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .notepad {
+    padding: 15px;
+  }
+
+  .notepad h3 {
+    font-size: 1rem;
+  }
+
+  .notepad textarea {
+    height: 120px;
+  }
+
+  .data-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .mode-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .music-player-widget {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .countdown-widget {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .countdown-display h3 {
+    font-size: 2.5rem;
+  }
+
+  .countdown-labels {
+    font-size: 0.9rem;
+  }
+
+  .custom-time-input {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+
+  .start-btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
 }
