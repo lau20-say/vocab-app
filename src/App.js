@@ -263,6 +263,27 @@ const App = () => {
     }`;
   };
 
+  const docTuVung = () => {
+    if (
+      danhSachTuVung.length === 0 ||
+      !danhSachTuVung[chiSoHienTai]?.tiengAnh
+    ) {
+      return;
+    }
+
+    const tuHienTai = danhSachTuVung[chiSoHienTai].tiengAnh;
+    const utterance = new SpeechSynthesisUtterance(tuHienTai);
+    utterance.lang = "en-US"; // Đặt ngôn ngữ là tiếng Anh (Mỹ)
+    utterance.rate = 0.9; // Tốc độ đọc (gần giống Google Dịch)
+    utterance.pitch = 1; // Độ cao giọng
+    utterance.volume = 1; // Âm lượng
+
+    // Hủy các utterance đang phát (nếu có)
+    window.speechSynthesis.cancel();
+    // Phát âm từ
+    window.speechSynthesis.speak(utterance);
+  };
+
   useEffect(() => {
     if (cheDo === 1 && danhSachTuVung.length > 0) {
       setTienDo(0);
@@ -384,7 +405,6 @@ const App = () => {
           >
             ← Chọn chế độ khác
           </button>
-          {/* Chỉ hiển thị .card khi không ở trạng thái kết quả kiểm tra hoặc ở chế độ 1, 2 */}
           {(cheDo === 1 || cheDo === 2 || (cheDo === 3 && !ketQuaKiemTra)) && (
             <div className={`card ${hienNghia ? "show-meaning" : ""}`}>
               <h2 className="word">
@@ -405,9 +425,14 @@ const App = () => {
                 </div>
               )}
               {cheDo === 2 && (
-                <button className="next-btn" onClick={sangTheTiepTheo}>
-                  {hienNghia ? "Tiếp theo →" : "Hiện nghĩa"}
-                </button>
+                <div className="manual-controls">
+                  <button className="speak-btn" onClick={docTuVung}>
+                    🔊 Phát âm
+                  </button>
+                  <button className="next-btn" onClick={sangTheTiepTheo}>
+                    {hienNghia ? "Tiếp theo →" : "Hiện nghĩa"}
+                  </button>
+                </div>
               )}
               {cheDo === 3 && !ketQuaKiemTra && tuVungKiemTra.length > 0 && (
                 <div className="options">
