@@ -213,18 +213,7 @@ const App = () => {
                   ></div>
                 </div>
               )}
-              {(cheDo === 2 || cheDo === 5) && (
-                <div className="manual-controls">
-                  {cheDo === 2 && (
-                    <button className="speak-btn" onClick={docTuVung}>
-                      🔊 Phát âm
-                    </button>
-                  )}
-                  <button className="next-btn" onClick={sangTheTiepTheo}>
-                    {hienNghia ? "Tiếp theo →" : "Hiện nghĩa"}
-                  </button>
-                </div>
-              )}
+
               {(cheDo === 3 || cheDo === 6) &&
                 !ketQuaKiemTra &&
                 tuVungKiemTra.length > 0 && (
@@ -267,7 +256,18 @@ const App = () => {
           )}
         </div>
       )}
-
+      {(cheDo === 2 || cheDo === 5) && (
+        <div className="manual-controls">
+          {cheDo === 2 && (
+            <button className="speak-btn" onClick={docTuVung}>
+              🔊 Phát âm
+            </button>
+          )}
+          <button className="next-btn" onClick={sangTheTiepTheo}>
+            {hienNghia ? "Tiếp theo →" : "Hiện nghĩa"}
+          </button>
+        </div>
+      )}
       {!cheDo && (
         <>
           {thongBaoLoi && <p className="error-message">{thongBaoLoi}</p>}
@@ -278,7 +278,7 @@ const App = () => {
               <textarea
                 value={duLieuNhap}
                 onChange={(e) => setDuLieuNhap(e.target.value)}
-                placeholder="Dán hoặc nhập từ vựng, mỗi dòng một từ, ví dụ:\napple: quả táo\ncat: con mèo\nCần ít nhất 2 từ cho chế độ kiểm tra!"
+                placeholder={`Dán hoặc nhập từ vựng, mỗi dòng một từ, ví dụ:\n\napple: quả táo\n\ncat: con mèo\n\nCần ít nhất 2 từ cho chế độ kiểm tra!`}
                 rows="10"
               />
               <div className="notepad-actions">
